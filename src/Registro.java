@@ -6,13 +6,13 @@ public class Registro {
     private String categoria;
     private int coste;
     private int stock;
-    private LocalDate fecha;
+    private String fecha;
     private boolean financiacion;
 
     public Registro() {
     }
 
-    public Registro(String nombre, String categoria, int coste, int stock, LocalDate fecha, boolean financiacion) {
+    public Registro(String nombre, String categoria, int coste, int stock, String fecha, boolean financiacion) {
         this.nombre       = nombre;
         this.categoria    = categoria;
         this.coste        = coste;
@@ -53,11 +53,11 @@ public class Registro {
         this.stock = stock;
     }
 
-    public LocalDate getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDate fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 

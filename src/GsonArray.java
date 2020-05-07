@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 public class GsonArray {
+
     public static List<Persona> desserializarJsonAArrayPersona() {
         String jsonInString = "personas.json";
         List<Persona> listaPersonas = null;
@@ -19,6 +20,22 @@ public class GsonArray {
         }
         return listaPersonas;
     }
+
+    public static List<Registro> desserializarJsonAArrayRegistro() {
+        String jsonInString = "registros.json";
+        List<Registro> listaRegistros = null;
+        try (Reader reader = new FileReader(jsonInString)) {
+            Gson gson = new Gson();
+            Type tipoListaRegistros = new TypeToken<List<Registro>>() {}.getType();
+            List<Registro> registros = gson.fromJson(reader, tipoListaRegistros);
+            listaRegistros = registros;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return listaRegistros;
+    }
+
+
 
     public static void EscribirJson(String representacionBonita, String ruta) {
         try {
