@@ -20,7 +20,7 @@ public class Principal {
 //		registros.add(r1);
 
 //		System.out.println(r1.toString());
-
+//
 		System.out.println("Bienvenido/a a TechMarket, introduzca su usuario para iniciar sesion");
 
 		Scanner entrada=new Scanner(System.in);
