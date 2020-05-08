@@ -35,8 +35,6 @@ public class GsonArray {
         return listaRegistros;
     }
 
-
-
     public static void EscribirJson(String representacionBonita, String ruta) {
         try {
             BufferedWriter bw; // Escribimos la info en el archivo json
@@ -47,12 +45,4 @@ public class GsonArray {
             ioe.printStackTrace();
         }
     }
-
-//    lista.add(nuevo); // añadimos el nuevo usuario a la lista
-//    Gson prettyGson = new GsonBuilder().setPrettyPrinting().create(); // Pasamos la lista a formato json
-//    String representacionBonita = prettyGson.toJson(lista);
-//    String ruta = "usuarios.json";
-//	GsonGeneral.EscribirJson(representacionBonita, ruta);
-
-
 }

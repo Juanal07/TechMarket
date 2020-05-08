@@ -5,26 +5,23 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Principal {
+	
+	static Scanner entrada = new Scanner(System.in);
 
     public static void main(String[] args) {
 
         List<Persona> personas = GsonArray.desserializarJsonAArrayPersona();
         List<Registro> registros = GsonArray.desserializarJsonAArrayRegistro();
 
-//        for (Registro r : registros) {
-//            System.out.println(r.toString());
-//
-//        }
+        for (Registro r : registros) {
+            System.out.println(r.toString());
 
-        System.out.println("Bienvenido/a a TechMarket, introduzca su usuario para iniciar sesion");
+        }
 
-        Scanner entrada = new Scanner(System.in);
+        System.out.println("Bienvenido/a a TechMarket, introduzca su usuario para iniciar sesion");        
         String u = entrada.next();
-
         System.out.println("Introduzca su password");
-
-        Scanner entrada2 = new Scanner(System.in);
-        String psw = entrada2.next();
+        String psw = entrada.next();
 
         boolean encontrado = false;
         int i = 0;
@@ -41,7 +38,7 @@ public class Principal {
         }
         if (!encontrado)
             System.out.println("Usuario o password incorrecto");
-    }
+    entrada.close();}
 
     public static void opcionesUser() {
 
@@ -51,8 +48,7 @@ public class Principal {
                     '\n' + "-Gestionar registros(g)" +
                     '\n' + "-Visualizar registros dados unos parametros de busqueda(v)" +
                     '\n' + "-Salir(s)");
-            Scanner entrada3 = new Scanner(System.in);
-            opcion = entrada3.next();
+            opcion = entrada.next();
             switch (opcion) {
                 case "g":
                     System.out.println("escogio la g");
@@ -67,7 +63,9 @@ public class Principal {
                     System.out.println("error");
                     break;
             }
+            
         }
+        
     }
 
     public static void opcionesPowerUser() {
@@ -79,8 +77,7 @@ public class Principal {
                     '\n' + "-Enviar registros en csv por mail(m)" +
                     '\n' + "-Salir(s)");
 
-            Scanner entrada4 = new Scanner(System.in);
-            opcion = entrada4.next();
+            opcion = entrada.next();
 
             switch (opcion) {
                 case "v":
