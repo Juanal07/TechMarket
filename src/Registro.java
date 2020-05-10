@@ -71,7 +71,7 @@ public class Registro {
 
     @Override
     public String toString() {
-        return "Registro{" +
+        return "{" +
                 "nombre='" + nombre + '\'' +
                 ", categoria='" + categoria + '\'' +
                 ", coste=" + coste +
