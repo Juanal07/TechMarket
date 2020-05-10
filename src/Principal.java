@@ -13,7 +13,7 @@ public class Principal {
         //mensaje de entrada
         System.out.println("");
         System.out.println("・ーーーーーーーーーーーーーーーーーーー・");
-        System.out.println("《              TECHMARKET        》");
+        System.out.println("《            TECHMARKET          》");
         System.out.println("・ーーーーーーーーーーーーーーーーーーー・");
 
         login();
@@ -64,9 +64,9 @@ public class Principal {
             System.out.println("╔═══════════════════════════════════╗");
             System.out.println("║        ¿Qué desea realizar?       ║");
             System.out.println("║                                   ║");
-            System.out.println("║ ● GESTIONAR REGISTRO   (Pulse G)  ║");
-            System.out.println("║ ● VISUALIZAR REGISTRO  (Pulse V)  ║");
-            System.out.println("║ ● SALIR                (Pulse S)  ║");
+            System.out.println("║ - GESTIONAR REGISTRO   (Pulse G)  ║");
+            System.out.println("║ - VISUALIZAR REGISTRO  (Pulse V)  ║");
+            System.out.println("║ - SALIR                (Pulse S)  ║");
             System.out.println("╚═══════════════════════════════════╝");
 
             opcion = entrada.next();
@@ -100,11 +100,11 @@ public class Principal {
             System.out.println("╔═══════════════════════════════════════════════╗");
             System.out.println("║              ¿Qué desea realizar?             ║");
             System.out.println("║                                               ║");
-            System.out.println("║ ● VISUALIZAR ESTADÍSTICAS          (Pulse V)  ║");
-            System.out.println("║ ● IMPORTAR REGISTROS .CSV          (Pulse I)  ║");
-            System.out.println("║ ● EXPORTAR REGISTROS .CSV          (Pulse E)  ║");
-            System.out.println("║ ● ENVIAR REGISTROS .CSV POR EMAIL  (Pulse M)  ║");
-            System.out.println("║ ● SALIR                            (Pulse S)  ║");
+            System.out.println("║ - VISUALIZAR ESTADÍSTICAS          (Pulse V)  ║");
+            System.out.println("║ - IMPORTAR REGISTROS .CSV          (Pulse I)  ║");
+            System.out.println("║ - EXPORTAR REGISTROS .CSV          (Pulse E)  ║");
+            System.out.println("║ - ENVIAR REGISTROS .CSV POR EMAIL  (Pulse M)  ║");
+            System.out.println("║ - SALIR                            (Pulse S)  ║");
             System.out.println("╚═══════════════════════════════════════════════╝");
 
             opcion = entrada.next();
@@ -155,11 +155,11 @@ public class Principal {
             System.out.println("╔═══════════════════════════════════════════════╗");
             System.out.println("║              ¿Qué desea realizar?             ║");
             System.out.println("║                                               ║");
-            System.out.println("║ ● CREAR REGISTRO                   (Pulse C)  ║");
-            System.out.println("║ ● LEER REGISTROS                   (Pulse L)  ║");
-            System.out.println("║ ● ACTUALIZAR                       (Pulse A)  ║");
-            System.out.println("║ ● BORRAR REGISTRO                  (Pulse B)  ║");
-            System.out.println("║ ● SALIR                            (Pulse S)  ║");
+            System.out.println("║ - CREAR REGISTRO                   (Pulse C)  ║");
+            System.out.println("║ - LEER REGISTROS                   (Pulse L)  ║");
+            System.out.println("║ - ACTUALIZAR                       (Pulse A)  ║");
+            System.out.println("║ - BORRAR REGISTRO                  (Pulse B)  ║");
+            System.out.println("║ - SALIR                            (Pulse S)  ║");
             System.out.println("╚═══════════════════════════════════════════════╝");
 
             opcion = entrada.next();
@@ -263,12 +263,12 @@ public class Principal {
             System.out.println("╔═══════════════════════════════════════════════╗");
             System.out.println("║              ¿Qué desea actualizar?           ║");
             System.out.println("║                                               ║");
-            System.out.println("║ ● Nombre                           (Pulse N)  ║");
-            System.out.println("║ ● Categoria                        (Pulse C)  ║");
-            System.out.println("║ ● Coste                            (Pulse P)  ║");
-            System.out.println("║ ● Stock                            (Pulse E)  ║");
-            System.out.println("║ ● Financiacion                     (Pulse F)  ║");
-            System.out.println("║ ● SALIR                            (Pulse S)  ║");
+            System.out.println("║ - Nombre                           (Pulse N)  ║");
+            System.out.println("║ - Categoria                        (Pulse C)  ║");
+            System.out.println("║ - Coste                            (Pulse P)  ║");
+            System.out.println("║ - Stock                            (Pulse E)  ║");
+            System.out.println("║ - Financiacion                     (Pulse F)  ║");
+            System.out.println("║ - SALIR                            (Pulse S)  ║");
             System.out.println("╚═══════════════════════════════════════════════╝");
             opcion = entrada.next();
 
