@@ -43,10 +43,11 @@ public class Principal {
             if (personas.get(i).getUser().equals(u) && personas.get(i).getPassword().equals(psw)) {
                 encontrado = true;
                 System.out.println("\n \n¡Bienvenido de nuevo " + personas.get(i).getUser() + "!");
+                List<Registro> registros = GsonArray.desserializarJsonAArrayRegistro();
                 if (personas.get(i).getTipo().equals("user"))
-                    opcionesUser();
+                    opcionesUser(registros);
                 else
-                    opcionesPowerUser();
+                    opcionesPowerUser(registros);
             }
             i++;
         }
@@ -58,7 +59,7 @@ public class Principal {
 
     }
 
-    public static void opcionesUser() {
+    public static void opcionesUser(List<Registro>registros) {
 
         String opcion = "";
         while (!opcion.equals("s")) {
@@ -75,10 +76,11 @@ public class Principal {
             switch (opcion) {
                 case "g":
                     System.out.println("Has escogido [GESTIONAR REGISTRO]");
-                    gestionarRegistros();
+                    gestionarRegistros(registros);
                     break;
                 case "v":
                     System.out.println("Has escogido [VISUALIZAR REGISTRO]");
+                    visualizarRegistros(registros);
                     break;
                 case "s":
                     System.out.println("Has escogido [SALIR]");
@@ -93,7 +95,8 @@ public class Principal {
 
     }
 
-    public static void opcionesPowerUser() {
+
+    public static void opcionesPowerUser(List<Registro>registros) {
         String opcion = "";
         while (!opcion.equals("s")) {
 
@@ -113,25 +116,25 @@ public class Principal {
                 case "v":
                     System.out.println("Has escogido [VISUALIZAR ESTADÍSTICAS]");
 
-                    //llamamos método
+                    visualizarEstadisticas(registros);
 
                     break;
                 case "e":
                     System.out.println("Has escogido [EXPORTAR REGISTROS .CSV]");
 
-                    exportarCsv();
+                    exportarCsv(registros);
 
                     break;
                 case "i":
                     System.out.println("Has escogido [IMPORTAR REGISTROS .CSV]");
 
-                    importarCsv();
+                    importarCsv(registros);
 
                     break;
                 case "m":
                     System.out.println("Has escogido [ENVIAR REGISTROS .CSV POR EMAIL]");
 
-                    enviarCsv();
+                    enviarCsv(registros);
 
                     break;
                 case "s":
@@ -147,9 +150,7 @@ public class Principal {
         }
     }
 
-    public static void gestionarRegistros() {
-
-        List<Registro> registros = GsonArray.desserializarJsonAArrayRegistro();
+    public static void gestionarRegistros(List<Registro>registros) {
 
         String opcion = "";
         while (!opcion.equals("s")) {
@@ -213,27 +214,26 @@ public class Principal {
         categoria = entrada.next();
 
         String coste = "";
-        System.out.println("Introduzca coste:");
+        System.out.println("Introduzca coste:(número)");
         coste = entrada.next();
         int coste2 = Integer.parseInt(coste);
 
         String stock = "";
-        System.out.println("Introduzca stock:");
+        System.out.println("Introduzca stock:(número)");
         stock = entrada.next();
         int stock2 = Integer.parseInt(stock);
 
         String financiacion = "";
-        System.out.println("Introduzca financiacion:");
+        System.out.println("Introduzca si quiere financiacion:(true/false)");
         financiacion = entrada.next();
         boolean financiacion2 = Boolean.parseBoolean(financiacion);
 
         String fecha = LocalDate.now().toString();
 
 
-        Registro reg = new Registro(nombre,categoria,coste2,stock2,fecha,financiacion2);
+        Registro reg = new Registro(nombre, categoria, coste2, stock2, fecha, financiacion2);
         registros.add(reg);
         escribirJson(registros);
-
 
 
     }
@@ -254,68 +254,78 @@ public class Principal {
         String opcion = "";
         String i = "";
         String actualizacion = "";
-        System.out.println("¿Qué registro deseas actualizar?");
+        System.out.println("¿Qué registro deseas actualizar?(del 0 al "+ (registros.size()-1)+")");
         leerReg(registros);
-        i = entrada.next();
-        System.out.println(registros.get(Integer.parseInt(i)));
-        System.out.println("╔═══════════════════════════════════════════════╗");
-        System.out.println("║              ¿Qué desea actualizar?           ║");
-        System.out.println("║                                               ║");
-        System.out.println("║ ● Nombre                           (Pulse N)  ║");
-        System.out.println("║ ● Categoria                        (Pulse C)  ║");
-        System.out.println("║ ● Coste                            (Pulse P)  ║");
-        System.out.println("║ ● Stock                            (Pulse S)  ║");
-        System.out.println("║ ● Financiacion                     (Pulse F)  ║");
-        System.out.println("║ ● SALIR                            (Pulse S)  ║");
-        System.out.println("╚═══════════════════════════════════════════════╝");
-        opcion = entrada.next();
+        i = entrada.next(); // se necesita cortafuegos para que no pete si introduces un numero mayor del size o una letra
 
-        switch (opcion) {
-            case "n":
-                System.out.println("Actualice y pulse enter");
-                actualizacion = entrada.next();
-                registros.get(Integer.parseInt(i)).setNombre(actualizacion);
-                registros.get(Integer.parseInt(i)).setFecha(LocalDate.now().toString());
-                System.out.println("Actualizado con éxito");
-                escribirJson(registros);
-                break;
-            case "c":
-                System.out.println("Actualice y pulse enter");
-                actualizacion = entrada.next();
-                registros.get(Integer.parseInt(i)).setCategoria(actualizacion);
-                registros.get(Integer.parseInt(i)).setFecha(LocalDate.now().toString());
-                System.out.println("Actualizado con éxito");
-                escribirJson(registros);
-                break;
-            case "p":
-                System.out.println("Actualice y pulse enter");
-                actualizacion = entrada.next();
-                registros.get(Integer.parseInt(i)).setCoste(Integer.parseInt(actualizacion));
-                registros.get(Integer.parseInt(i)).setFecha(LocalDate.now().toString());
-                System.out.println("Actualizado con éxito");
-                escribirJson(registros);
-                break;
-            case "s":
-                System.out.println("Actualice y pulse enter");
-                actualizacion = entrada.next();
-                registros.get(Integer.parseInt(i)).setStock(Integer.parseInt(actualizacion));
-                registros.get(Integer.parseInt(i)).setFecha(LocalDate.now().toString());
-                System.out.println("Actualizado con éxito");
-                escribirJson(registros);
-                break;
-            case "f":
-                System.out.println("¿Desea que este producto tenga financiación?(s/n)");
-                actualizacion = entrada.next();
-                if (actualizacion.equals("s"))
-                    registros.get(Integer.parseInt(i)).setFinanciacion(true);
-                else
-                    registros.get(Integer.parseInt(i)).setFinanciacion(false); //aqui faltaria un cortafuegos
-                registros.get(Integer.parseInt(i)).setFecha(LocalDate.now().toString());
-                System.out.println("Actualizado con éxito");
-                escribirJson(registros);
-            default:
-                System.out.println("Ha surgido un error, vuelve a intentarlo!");
-                break;
+
+        while (!opcion.equals("s")) {
+
+
+            System.out.println(registros.get(Integer.parseInt(i)));
+            System.out.println("╔═══════════════════════════════════════════════╗");
+            System.out.println("║              ¿Qué desea actualizar?           ║");
+            System.out.println("║                                               ║");
+            System.out.println("║ ● Nombre                           (Pulse N)  ║");
+            System.out.println("║ ● Categoria                        (Pulse C)  ║");
+            System.out.println("║ ● Coste                            (Pulse P)  ║");
+            System.out.println("║ ● Stock                            (Pulse E)  ║");
+            System.out.println("║ ● Financiacion                     (Pulse F)  ║");
+            System.out.println("║ ● SALIR                            (Pulse S)  ║");
+            System.out.println("╚═══════════════════════════════════════════════╝");
+            opcion = entrada.next();
+
+            switch (opcion) {
+                case "n":
+                    System.out.println("Actualice y pulse enter");
+                    actualizacion = entrada.next();
+                    registros.get(Integer.parseInt(i)).setNombre(actualizacion);
+                    registros.get(Integer.parseInt(i)).setFecha(LocalDate.now().toString());
+                    System.out.println("Actualizado con éxito");
+                    escribirJson(registros);
+                    break;
+                case "c":
+                    System.out.println("Actualice y pulse enter");
+                    actualizacion = entrada.next();
+                    registros.get(Integer.parseInt(i)).setCategoria(actualizacion);
+                    registros.get(Integer.parseInt(i)).setFecha(LocalDate.now().toString());
+                    System.out.println("Actualizado con éxito");
+                    escribirJson(registros);
+                    break;
+                case "p":
+                    System.out.println("Actualice y pulse enter");
+                    actualizacion = entrada.next();
+                    registros.get(Integer.parseInt(i)).setCoste(Integer.parseInt(actualizacion));
+                    registros.get(Integer.parseInt(i)).setFecha(LocalDate.now().toString());
+                    System.out.println("Actualizado con éxito");
+                    escribirJson(registros);
+                    break;
+                case "e":
+                    System.out.println("Actualice y pulse enter");
+                    actualizacion = entrada.next();
+                    registros.get(Integer.parseInt(i)).setStock(Integer.parseInt(actualizacion));
+                    registros.get(Integer.parseInt(i)).setFecha(LocalDate.now().toString());
+                    System.out.println("Actualizado con éxito");
+                    escribirJson(registros);
+                    break;
+                case "f":
+                    System.out.println("¿Desea que este producto tenga financiación?(s/n)");
+                    actualizacion = entrada.next();
+                    if (actualizacion.equals("s"))
+                        registros.get(Integer.parseInt(i)).setFinanciacion(true);
+                    else
+                        registros.get(Integer.parseInt(i)).setFinanciacion(false); //aqui faltaria un cortafuegos
+                    registros.get(Integer.parseInt(i)).setFecha(LocalDate.now().toString());
+                    System.out.println("Actualizado con éxito");
+                    escribirJson(registros);
+                    break;
+                case "s":
+                    System.out.println("Has escogido [SALIR]");
+                    break;
+                default:
+                    System.out.println("Ha surgido un error, vuelve a intentarlo!");
+                    break;
+            }
         }
     }
 
@@ -324,7 +334,7 @@ public class Principal {
 
         String i = "";
         leerReg(registros);
-        System.out.println("¿Qué registro deseas borrar?");
+        System.out.println("¿Qué registro deseas borrar? (del 0 al "+ (registros.size()-1)+")");
         i = entrada.next();
         System.out.println(registros.get(Integer.parseInt(i)));
         registros.remove(Integer.parseInt(i));
@@ -332,20 +342,99 @@ public class Principal {
         escribirJson(registros);
     }
 
-    public static void importarCsv() {
+    private static void visualizarRegistros(List<Registro>registros) {
+
+        System.out.println("Indique en que categoria quiere buscar");
+        String categoria;
+        categoria = entrada.next();
+
+        System.out.println("Indique el precio maximo");
+        String precio;
+        precio = entrada.next();
+
+        int i = 0;
+        for (Registro r : registros) {
+            if(registros.get(i).getCategoria().equals(categoria) && registros.get(i).getCoste()<=Integer.parseInt(precio))
+                System.out.println(i + ": " + r.toString());
+            i++;
+        }
+
+
+    }
+
+
+    private static void visualizarEstadisticas(List<Registro>registros) {
+        System.out.println("Tienes un total de: "+registros.size()+" registros");
+        System.out.println("Coste medio: "+media(registros)+" euros");
+        System.out.println("Coste maximo: "+max(registros)+" euros");
+        System.out.println("Coste minimo: "+min(registros)+" euros");
+        System.out.println("Actualizaciones de registros este mes: "+actualizaciones(registros));
+    }
+
+    private static int media(List<Registro> registros) {
+        int m=0;
+        int i = 0;
+        for (Registro r : registros) {
+            m+=registros.get(i).getCoste();
+            i++;
+        }
+        return m/i;
+    }
+
+    private static int max(List<Registro> registros) {
+        int m=0;
+        int i = 0;
+        for (Registro r : registros) {
+            if (m<=registros.get(i).getCoste())
+                m=registros.get(i).getCoste();
+            i++;
+        }
+        return m;
+    }
+
+    private static int min(List<Registro> registros) {
+        int m=registros.get(0).getCoste();
+        int i = 0;
+        for (Registro r : registros) {
+            if (m>=registros.get(i).getCoste())
+                m=registros.get(i).getCoste();
+            i++;
+        }
+        return m;
+    }
+
+    private static int actualizaciones(List<Registro> registros) {
+
+        String fechaActual = LocalDate.now().toString();
+        String[] parts = fechaActual.split("-");
+        String part2 = parts[1];
+
+        int contador=0;
+        int i = 0;
+        for (Registro r : registros) {
+            String [] parts2 =registros.get(i).getFecha().split("-");
+            String part2_2 = parts2[1];
+            if(part2_2.equals(part2))
+                contador++;
+            i++;
+        }
+        return contador;
+    }
+
+    public static void importarCsv(List<Registro>registros) {
 
         //a completar
 
     }
 
-    public static void exportarCsv() {
+    public static void exportarCsv(List<Registro>registros) {
 
         //a completar
 
     }
 
 
-    public static void enviarCsv() {
+    public static void enviarCsv(List<Registro>registros) {
 
         //a completar
 

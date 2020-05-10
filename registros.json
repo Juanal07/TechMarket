@@ -8,11 +8,11 @@
     "financiacion": false
   },
   {
-    "nombre": "amd1",
-    "categoria": "placa",
-    "coste": 55,
-    "stock": 3,
+    "nombre": "bateria2",
+    "categoria": "bateria",
+    "coste": 44,
+    "stock": 2,
     "fecha": "2020-05-10",
-    "financiacion": true
+    "financiacion": false
   }
 ]
