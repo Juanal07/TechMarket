@@ -1,9 +1,6 @@
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
-import javax.sound.midi.Soundbank;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -351,13 +348,17 @@ public class Principal {
         System.out.println("Indique el precio maximo");
         String precio;
         precio = entrada.next();
-
+        boolean condicion = false;
         int i = 0;
         for (Registro r : registros) {
-            if(registros.get(i).getCategoria().equals(categoria) && registros.get(i).getCoste()<=Integer.parseInt(precio))
+            if(registros.get(i).getCategoria().equals(categoria) && registros.get(i).getCoste()<=Integer.parseInt(precio)){
                 System.out.println(i + ": " + r.toString());
+                condicion=true;
+            }
             i++;
         }
+        if (condicion==false)
+            System.out.println("No se ha encontrado ningún registro con esos criterios de búsqueda");
 
 
     }
