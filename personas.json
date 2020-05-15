@@ -1,14 +1,14 @@
 [{
-  "user": "prueba",
+  "user": "poweruser",
   "password": "1234",
-  "tipo": "poweUrser",
-  "email": "prueba@gmail.com"
+  "tipo": "powerUser",
+  "email": "poweruser@gmail.com"
 },
 
   {
-    "user": "juan",
+    "user": "user",
     "password": "1234",
     "tipo": "user",
-    "email": "juan1@gmail.com"
+    "email": "user@gmail.com"
   }
 ]
