@@ -1,5 +1,6 @@
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
@@ -56,7 +57,7 @@ public class Principal {
 
     }
 
-    public static void opcionesUser(List<Registro>registros) {
+    public static void opcionesUser(List<Registro> registros) {
 
         String opcion = "";
         while (!opcion.equals("s")) {
@@ -93,7 +94,7 @@ public class Principal {
     }
 
 
-    public static void opcionesPowerUser(List<Registro>registros) {
+    public static void opcionesPowerUser(List<Registro> registros) {
         String opcion = "";
         while (!opcion.equals("s")) {
 
@@ -147,7 +148,7 @@ public class Principal {
         }
     }
 
-    public static void gestionarRegistros(List<Registro>registros) {
+    public static void gestionarRegistros(List<Registro> registros) {
 
         String opcion = "";
         while (!opcion.equals("s")) {
@@ -251,7 +252,7 @@ public class Principal {
         String opcion = "";
         String i = "";
         String actualizacion = "";
-        System.out.println("¿Qué registro deseas actualizar?(del 0 al "+ (registros.size()-1)+")");
+        System.out.println("¿Qué registro deseas actualizar?(del 0 al " + (registros.size() - 1) + ")");
         leerReg(registros);
         i = entrada.next(); // se necesita cortafuegos para que no pete si introduces un numero mayor del size o una letra
 
@@ -331,7 +332,7 @@ public class Principal {
 
         String i = "";
         leerReg(registros);
-        System.out.println("¿Qué registro deseas borrar? (del 0 al "+ (registros.size()-1)+")");
+        System.out.println("¿Qué registro deseas borrar? (del 0 al " + (registros.size() - 1) + ")");
         i = entrada.next();
         System.out.println(registros.get(Integer.parseInt(i)));
         registros.remove(Integer.parseInt(i));
@@ -339,7 +340,7 @@ public class Principal {
         escribirJson(registros);
     }
 
-    private static void visualizarRegistros(List<Registro>registros) {
+    public static void visualizarRegistros(List<Registro> registros) {
 
         System.out.println("Indique en que categoria quiere buscar");
         String categoria;
@@ -351,91 +352,91 @@ public class Principal {
         boolean condicion = false;
         int i = 0;
         for (Registro r : registros) {
-            if(registros.get(i).getCategoria().equals(categoria) && registros.get(i).getCoste()<=Integer.parseInt(precio)){
+            if (registros.get(i).getCategoria().equals(categoria) && registros.get(i).getCoste() <= Integer.parseInt(precio)) {
                 System.out.println(i + ": " + r.toString());
-                condicion=true;
+                condicion = true;
             }
             i++;
         }
-        if (condicion==false)
+        if (condicion == false)
             System.out.println("No se ha encontrado ningún registro con esos criterios de búsqueda");
 
 
     }
 
 
-    private static void visualizarEstadisticas(List<Registro>registros) {
-        System.out.println("Tienes un total de: "+registros.size()+" registros");
-        System.out.println("Coste medio: "+media(registros)+" euros");
-        System.out.println("Coste maximo: "+max(registros)+" euros");
-        System.out.println("Coste minimo: "+min(registros)+" euros");
-        System.out.println("Actualizaciones de registros este mes: "+actualizaciones(registros));
+    public static void visualizarEstadisticas(List<Registro> registros) {
+        System.out.println("Tienes un total de: " + registros.size() + " registros");
+        System.out.println("Coste medio: " + media(registros) + " euros");
+        System.out.println("Coste maximo: " + max(registros) + " euros");
+        System.out.println("Coste minimo: " + min(registros) + " euros");
+        System.out.println("Actualizaciones de registros este mes: " + actualizaciones(registros));
     }
 
-    private static int media(List<Registro> registros) {
-        int m=0;
+    public static int media(List<Registro> registros) {
+        int m = 0;
         int i = 0;
         for (Registro r : registros) {
-            m+=registros.get(i).getCoste();
+            m += registros.get(i).getCoste();
             i++;
         }
-        return m/i;
+        return m / i;
     }
 
-    private static int max(List<Registro> registros) {
-        int m=0;
+    public static int max(List<Registro> registros) {
+        int m = 0;
         int i = 0;
         for (Registro r : registros) {
-            if (m<=registros.get(i).getCoste())
-                m=registros.get(i).getCoste();
-            i++;
-        }
-        return m;
-    }
-
-    private static int min(List<Registro> registros) {
-        int m=registros.get(0).getCoste();
-        int i = 0;
-        for (Registro r : registros) {
-            if (m>=registros.get(i).getCoste())
-                m=registros.get(i).getCoste();
+            if (m <= registros.get(i).getCoste())
+                m = registros.get(i).getCoste();
             i++;
         }
         return m;
     }
 
-    private static int actualizaciones(List<Registro> registros) {
+    public static int min(List<Registro> registros) {
+        int m = registros.get(0).getCoste();
+        int i = 0;
+        for (Registro r : registros) {
+            if (m >= registros.get(i).getCoste())
+                m = registros.get(i).getCoste();
+            i++;
+        }
+        return m;
+    }
+
+    public static int actualizaciones(List<Registro> registros) {
 
         String fechaActual = LocalDate.now().toString();
         String[] parts = fechaActual.split("-");
         String part2 = parts[1];
 
-        int contador=0;
+        int contador = 0;
         int i = 0;
         for (Registro r : registros) {
-            String [] parts2 =registros.get(i).getFecha().split("-");
+            String[] parts2 = registros.get(i).getFecha().split("-");
             String part2_2 = parts2[1];
-            if(part2_2.equals(part2))
+            if (part2_2.equals(part2))
                 contador++;
             i++;
         }
         return contador;
     }
 
-    public static void importarCsv(List<Registro>registros) {
+    public static void importarCsv(List<Registro> registros) {
 
         //a completar
 
     }
 
-    public static void exportarCsv(List<Registro>registros) {
+    public static void exportarCsv(List<Registro> registros) {
 
         //a completar
 
     }
 
 
-    public static void enviarCsv(List<Registro>registros) {
+    public static void enviarCsv(List<Registro> registros) {
 
         //a completar
 
