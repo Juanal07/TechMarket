@@ -20,7 +20,7 @@ public class Principal {
         //mensaje de entrada
         System.out.println("");
         System.out.println("・ーーーーーーーーーーーーーーーーーーー・");
-        System.out.println("《            TECHMARKET          》");
+        System.out.println("《                 TECHMARKET          》");
         System.out.println("・ーーーーーーーーーーーーーーーーーーー・");
 
         login();
@@ -101,17 +101,18 @@ public class Principal {
 
 
     public static void opcionesPowerUser(List<Registro> registros) {
-        String opcion = "";
-        while (!opcion.equals("s")) {
-
-            System.out.println("╔═══════════════════════════════════════════════╗");
-            System.out.println("║              ¿Qué desea realizar?             ║");
-            System.out.println("║                                               ║");
-            System.out.println("║ - VISUALIZAR ESTADÍSTICAS          (Pulse V)  ║");
-            System.out.println("║ - IMPORTAR REGISTROS .CSV          (Pulse I)  ║");
-            System.out.println("║ - EXPORTAR REGISTROS .CSV          (Pulse E)  ║");
-            System.out.println("║ - ENVIAR REGISTROS .CSV POR EMAIL  (Pulse M)  ║");
-            System.out.println("║ - SALIR                            (Pulse S)  ║");
+    	String opcion = "";
+    	while (!opcion.equals("s")) {
+    		
+    		System.out.println("Usted se encuentra en el modo ADMINISTRADOR");
+    		System.out.println("╔═══════════════════════════════════════════════╗");
+    		System.out.println("║              ¿Qué desea realizar?             ║");
+    		System.out.println("║                                               ║");
+    		System.out.println("║ - VISUALIZAR ESTADÍSTICAS          (Pulse V)  ║");
+    		System.out.println("║ - IMPORTAR REGISTROS .CSV          (Pulse I)  ║");
+    		System.out.println("║ - EXPORTAR REGISTROS .CSV          (Pulse E)  ║");
+    		System.out.println("║ - ENVIAR REGISTROS .CSV POR EMAIL  (Pulse M)  ║");
+    		System.out.println("║ - SALIR                            (Pulse S)  ║");
             System.out.println("╚═══════════════════════════════════════════════╝");
 
             opcion = entrada.next();
