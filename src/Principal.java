@@ -1,8 +1,14 @@
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Properties;
 import java.util.Scanner;
 
 public class Principal {
@@ -132,7 +138,7 @@ public class Principal {
                 case "m":
                     System.out.println("Has escogido [ENVIAR REGISTROS .CSV POR EMAIL]");
 
-                    enviarCsv(registros);
+                    enviarMail(registros);
 
                     break;
                 case "s":
@@ -436,10 +442,84 @@ public class Principal {
     }
 
 
-    public static void enviarCsv(List<Registro> registros) {
+    public static void enviarMail(List<Registro> registros) {
 
-        //a completar
+        Scanner entrada = new Scanner(System.in);
 
+        //
+        // DESTINATARIO DEL CORREO
+        //
+        System.out.println("Introduce el correo electrónico: ");
+        String destinatario = entrada.nextLine();
+
+        //
+        // REMITENTE DEL CORREO
+        //
+
+        //Cuenta de correo del remitente
+        String remitente = "techmarket42";       //Dirección de correo del remitente (se añade solo @gmail.com)
+        String contraseña = "Techmarket+19";    //Contraseña de la cuenta de gmail.com
+
+
+        //
+        // CONTENIDO DEL CORREO
+        //
+
+        //Asunto del correo electrónico
+        String asunto = "Información registros:";
+
+        //Cuerpo del correo electrónico
+        String cuerpo = "Meter aquí los registros a enviar";
+
+        //Firma del correo electrónico
+        String firma = "\n \nGracias por confiar en nosotros! \n [Equipo de Techmarket]";
+
+
+
+
+        //Configuraciones de Google / Gmail
+        Properties props = System.getProperties();
+        props.put("mail.smtp.host", "smtp.gmail.com");            //El servidor SMTP de Google
+        props.put("mail.smtp.user", remitente);
+        props.put("mail.smtp.clave", contraseña);
+        props.put("mail.smtp.auth", "true");                    //Autentificación de correo y contraseña
+        props.put("mail.smtp.starttls.enable", "true");        //Para conectar de manera segura al servidor SMTP
+        props.put("mail.smtp.port", "587");                   //El puerto SMTP seguro de Google (encriptado)
+
+        Session session = Session.getDefaultInstance(props);
+        MimeMessage message = new MimeMessage(session);
+
+        try {
+            message.setFrom(new InternetAddress(remitente));
+            message.addRecipients(Message.RecipientType.TO, destinatario);   //Se podrían añadir varios de la misma manera
+
+            //Se añade el asunto al correo
+            message.setSubject(asunto);
+
+            //Se añade el cuerpo al correo
+            message.setText(cuerpo);
+
+            //Se añade la firma al correo
+            message.setText(firma);
+
+            //Se realiza el login por parte del remitente
+            Transport transport = session.getTransport("smtp");
+            transport.connect("smtp.gmail.com", remitente, contraseña);
+
+            //Se envía el correo electrónico
+            transport.sendMessage(message, message.getAllRecipients());
+            transport.close();
+
+            //Enviado con éxito
+            System.out.println("\nEl correo ha sido enviado con éxito! \n \n");
+            opcionesPowerUser(registros);
+        }
+
+        //En caso de fallo, volvemos a ejecutar el método
+        catch (Exception e) {
+            System.out.println("\nEl correo electrónico es incorrecto! \n ");
+            enviarMail(registros);
+        }
     }
 
     public static void escribirJson(List<Registro> registros) { //siempre que se actualice la lista hay que usar este metodo para que actualice el json
