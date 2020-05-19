@@ -6,6 +6,14 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+
+import java.awt.Component;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Properties;
@@ -125,9 +133,9 @@ public class Principal {
 
                     break;
                 case "e":
-                    System.out.println("Has escogido [EXPORTAR REGISTROS .CSV]");
-
-                    exportarCsv(registros);
+                	System.out.println("Has escogido [EXPORTAR REGISTROS .CSV]");
+                	
+                	exportarCsv(registros);
 
                     break;
                 case "i":
@@ -431,23 +439,53 @@ public class Principal {
     }
 
     public static void importarCsv(List<Registro> registros) {
-
-        //a completar
+    	
 
     }
-
+    
     public static void exportarCsv(List<Registro> registros) {
 
-        //a completar
+    	try
+    	{
+    		JFileChooser file=new JFileChooser();
+    		file.showSaveDialog(null);
+    		File fichero = file.getSelectedFile();
 
+    		if(fichero != null)
+    		{
+    			/*guardamos el archivo y le damos el formato directamente,
+    			 * si queremos que se guarde en formato doc lo definimos como .doc*/
+    			FileWriter  save = new FileWriter(fichero + ".csv");
+    			for (Registro r : registros) {
+    				save.write("" + r.getNombre());
+    				save.write(";");
+    				save.write("" + r.getCategoria());
+    				save.write(";");
+    				save.write("" + r.getCoste());
+    				save.write(";");
+    				save.write("" + r.getStock());
+    				save.write(";");
+    				save.write("" + r.getFecha());
+    				save.write(";");
+    				save.write("" + r.getFinanciacion());
+    				save.write("\n");
+    			}
+    			save.close();
+    			System.out.println("El archivo ha sido exportado con éxito!\n \n");
+    		}  
+    	}
+    	catch(IOException ex) {
+    		System.out.println("Error en la exportación del archivo .CSV \n \n");
+    		opcionesPowerUser(registros);
+    	}
     }
 
 
-    public static void enviarMail(List<Registro> registros) {
+public static void enviarMail(List<Registro> registros) {
 
-        Scanner entrada = new Scanner(System.in);
+	Scanner entrada = new Scanner(System.in);
 
-        //
+	    //
         // DESTINATARIO DEL CORREO
         //
         System.out.println("Introduce el correo electrónico: ");
