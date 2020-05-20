@@ -1,37 +1,37 @@
 [{
   "user": "prueba",
-  "password": "1234",
+  "password": "81dc9bdb52d04dc20036dbd8313ed055",
   "tipo": "poweUrser",
   "email": "prueba@gmail.com"
 },
 {
   "user": "Ricardo",
-  "password": "1234",
+  "password": "81dc9bdb52d04dc20036dbd8313ed055",
   "tipo": "poweUser",
   "email": "ricardo@gmail.com"
 },
 {
   "user": "Nacho",
-  "password": "1234",
+  "password": "81dc9bdb52d04dc20036dbd8313ed055",
   "tipo": "User",
   "email": "nacho@gmail.com"
 },
 {
   "user": "Gabriel",
-  "password": "1234",
+  "password": "81dc9bdb52d04dc20036dbd8313ed055",
   "tipo": "poweUser",
   "email": "gabriel@gmail.com"
 },
 {
   "user": "Sandro",
-  "password": "1234",
+  "password": "81dc9bdb52d04dc20036dbd8313ed055",
   "tipo": "User",
   "email": "sandro10@gmail.com"
 },
 
   {
     "user": "juan",
-    "password": "1234",
+    "password": "81dc9bdb52d04dc20036dbd8313ed055",
     "tipo": "user",
     "email": "juan1@gmail.com"
   }

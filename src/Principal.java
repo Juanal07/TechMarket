@@ -14,6 +14,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Properties;
@@ -52,7 +55,7 @@ public class Principal {
         boolean encontrado = false;
         int i = 0;
         while (i < personas.size() && !encontrado) {
-            if (personas.get(i).getUser().equals(u) && personas.get(i).getPassword().equals(psw)) {
+            if (personas.get(i).getUser().equals(u) && personas.get(i).getPassword().equals(getMd5(psw))) {
                 encontrado = true;
                 System.out.println("\n \n¡Bienvenido de nuevo " + personas.get(i).getUser() + "!");
                 List<Registro> registros = GsonArray.desserializarJsonAArrayRegistro();
@@ -109,18 +112,18 @@ public class Principal {
 
 
     public static void opcionesPowerUser(List<Registro> registros) {
-    	String opcion = "";
-    	while (!opcion.equals("s")) {
-    		
-    		System.out.println("Usted se encuentra en el modo ADMINISTRADOR");
-    		System.out.println("╔═══════════════════════════════════════════════╗");
-    		System.out.println("║              ¿Qué desea realizar?             ║");
-    		System.out.println("║                                               ║");
-    		System.out.println("║ - VISUALIZAR ESTADÍSTICAS          (Pulse V)  ║");
-    		System.out.println("║ - IMPORTAR REGISTROS .CSV          (Pulse I)  ║");
-    		System.out.println("║ - EXPORTAR REGISTROS .CSV          (Pulse E)  ║");
-    		System.out.println("║ - ENVIAR REGISTROS .CSV POR EMAIL  (Pulse M)  ║");
-    		System.out.println("║ - SALIR                            (Pulse S)  ║");
+        String opcion = "";
+        while (!opcion.equals("s")) {
+
+            System.out.println("Usted se encuentra en el modo ADMINISTRADOR");
+            System.out.println("╔═══════════════════════════════════════════════╗");
+            System.out.println("║              ¿Qué desea realizar?             ║");
+            System.out.println("║                                               ║");
+            System.out.println("║ - VISUALIZAR ESTADÍSTICAS          (Pulse V)  ║");
+            System.out.println("║ - IMPORTAR REGISTROS .CSV          (Pulse I)  ║");
+            System.out.println("║ - EXPORTAR REGISTROS .CSV          (Pulse E)  ║");
+            System.out.println("║ - ENVIAR REGISTROS .CSV POR EMAIL  (Pulse M)  ║");
+            System.out.println("║ - SALIR                            (Pulse S)  ║");
             System.out.println("╚═══════════════════════════════════════════════╝");
 
             opcion = entrada.next();
@@ -133,9 +136,9 @@ public class Principal {
 
                     break;
                 case "e":
-                	System.out.println("Has escogido [EXPORTAR REGISTROS .CSV]");
-                	
-                	exportarCsv(registros);
+                    System.out.println("Has escogido [EXPORTAR REGISTROS .CSV]");
+
+                    exportarCsv(registros);
 
                     break;
                 case "i":
@@ -227,7 +230,7 @@ public class Principal {
         categoria = entrada.next();
 
         String coste = "";
-        System.out.println("Introduzca coste:(número)");
+        System.out.println("Introduzca coste en céntimos:(número)");
         coste = entrada.next();
         int coste2 = Integer.parseInt(coste);
 
@@ -382,9 +385,9 @@ public class Principal {
 
     public static void visualizarEstadisticas(List<Registro> registros) {
         System.out.println("Tienes un total de: " + registros.size() + " registros");
-        System.out.println("Coste medio: " + media(registros) + " euros");
-        System.out.println("Coste maximo: " + max(registros) + " euros");
-        System.out.println("Coste minimo: " + min(registros) + " euros");
+        System.out.println("Coste medio: " + media(registros) + " céntimos");
+        System.out.println("Coste maximo: " + max(registros) + " céntimos");
+        System.out.println("Coste minimo: " + min(registros) + " céntimos");
         System.out.println("Actualizaciones de registros este mes: " + actualizaciones(registros));
     }
 
@@ -439,53 +442,53 @@ public class Principal {
     }
 
     public static void importarCsv(List<Registro> registros) {
-    	
+
 
     }
-    
+
     public static void exportarCsv(List<Registro> registros) {
 
-    	try
-    	{
-    		JFileChooser file=new JFileChooser();
-    		file.showSaveDialog(null);
-    		File fichero = file.getSelectedFile();
+        try
+        {
+            JFileChooser file=new JFileChooser();
+            file.showSaveDialog(null);
+            File fichero = file.getSelectedFile();
 
-    		if(fichero != null)
-    		{
-    			/*guardamos el archivo y le damos el formato directamente,
-    			 * si queremos que se guarde en formato doc lo definimos como .doc*/
-    			FileWriter  save = new FileWriter(fichero + ".csv");
-    			for (Registro r : registros) {
-    				save.write("" + r.getNombre());
-    				save.write(";");
-    				save.write("" + r.getCategoria());
-    				save.write(";");
-    				save.write("" + r.getCoste());
-    				save.write(";");
-    				save.write("" + r.getStock());
-    				save.write(";");
-    				save.write("" + r.getFecha());
-    				save.write(";");
-    				save.write("" + r.getFinanciacion());
-    				save.write("\n");
-    			}
-    			save.close();
-    			System.out.println("El archivo ha sido exportado con éxito!\n \n");
-    		}  
-    	}
-    	catch(IOException ex) {
-    		System.out.println("Error en la exportación del archivo .CSV \n \n");
-    		opcionesPowerUser(registros);
-    	}
+            if(fichero != null)
+            {
+                /*guardamos el archivo y le damos el formato directamente,
+                 * si queremos que se guarde en formato doc lo definimos como .doc*/
+                FileWriter  save = new FileWriter(fichero + ".csv");
+                for (Registro r : registros) {
+                    save.write("" + r.getNombre());
+                    save.write(";");
+                    save.write("" + r.getCategoria());
+                    save.write(";");
+                    save.write("" + r.getCoste());
+                    save.write(";");
+                    save.write("" + r.getStock());
+                    save.write(";");
+                    save.write("" + r.getFecha());
+                    save.write(";");
+                    save.write("" + r.isFinanciacion());
+                    save.write("\n");
+                }
+                save.close();
+                System.out.println("El archivo ha sido exportado con éxito!\n \n");
+            }
+        }
+        catch(IOException ex) {
+            System.out.println("Error en la exportación del archivo .CSV \n \n");
+            opcionesPowerUser(registros);
+        }
     }
 
 
-public static void enviarMail(List<Registro> registros) {
+    public static void enviarMail(List<Registro> registros) {
 
-	Scanner entrada = new Scanner(System.in);
+        Scanner entrada = new Scanner(System.in);
 
-	    //
+        //
         // DESTINATARIO DEL CORREO
         //
         System.out.println("Introduce el correo electrónico: ");
@@ -568,6 +571,23 @@ public static void enviarMail(List<Registro> registros) {
         String ruta = "registros.json";
         GsonArray.EscribirJson(representacionBonita, ruta);
 
+    }
+
+    public static String getMd5(String input) {
+        try {
+
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] messageDigest = md.digest(input.getBytes());
+            BigInteger no = new BigInteger(1, messageDigest);
+            String hashtext = no.toString(16);
+            while (hashtext.length() < 32) {
+                hashtext = "0" + hashtext;
+            }
+            return hashtext;
+        }
+        catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 

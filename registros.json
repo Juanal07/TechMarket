@@ -1,18 +1,258 @@
 [
   {
-    "nombre": "AMD A10-5800K 3.80Ghz",
-    "categoria": "procesador",
-    "coste": 55,
-    "stock": 5,
-    "fecha": "2020-05-10",
+    "nombre": "Gigabyte GeForce GTX 1050Ti OC 4GB GDDR5",
+    "categoria": "Tarjetas Gráfica",
+    "coste": 15499,
+    "stock": 30,
+    "fecha": "2016-10-18",
     "financiacion": false
   },
   {
-    "nombre": "bateria2",
-    "categoria": "bateria",
-    "coste": 44,
-    "stock": 2,
-    "fecha": "2020-05-10",
+    "nombre": "Gigabyte GeForce GTX 1060 OC 6GB GDDR5",
+    "categoria": "Tarjetas Gráfica",
+    "coste": 18948,
+    "stock": 100,
+    "fecha": "2016-07-19",
+    "financiacion": false
+  },
+  {
+    "nombre": "Gigabyte GeForce GTX 1070 Mini ITX OC 8GB GDDR5",
+    "categoria": "Tarjetas Gráfica",
+    "coste": 45990,
+    "stock": 5,
+    "fecha": "2016-07-19",
+    "financiacion": false
+  },
+  {
+    "nombre": "Gigabyte GeForce GTX 1070Ti 8GB GDDR5",
+    "categoria": "Tarjetas Gráfica",
+    "coste": 45499,
+    "stock": 20,
+    "fecha": "2016-10-19",
+    "financiacion": true
+  },
+  {
+    "nombre": "Gigabyte VGA Gigabyte Nvidia GeForce GTX 1080 G1 8GB GDDR5",
+    "categoria": "Tarjetas Gráfica",
+    "coste": 64000,
+    "stock": 10,
+    "fecha": "2016-07-15",
+    "financiacion": true
+  },
+  {
+    "nombre": "Gigabyte Aorus GTX 1080Ti 11GB",
+    "categoria": "Tarjetas Gráfica",
+    "coste": 114099,
+    "stock": 10,
+    "fecha": "2016-10-19",
+    "financiacion": true
+  },
+  {
+    "nombre": "Gigabyte Aorus RTX 2080Ti 11GB GDDR6",
+    "categoria": "Tarjetas Gráfica",
+    "coste": 134099,
+    "stock": 20,
+    "fecha": "2019-07-13",
+    "financiacion": true
+  },
+  {
+    "nombre": "Gigabyte Aorus RTX Super 2080 8GB GDDR6",
+    "categoria": "Tarjetas Gráfica",
+    "coste": 83999,
+    "stock": 50,
+    "fecha": "2019-07-13",
+    "financiacion": true
+  },
+  {
+    "nombre": "Gigabyte Aorus RTX Super 2070 8GB GDDR6",
+    "categoria": "Tarjetas Gráfica",
+    "coste": 64990,
+    "stock": 10,
+    "fecha": "2019-07-13",
+    "financiacion": true
+  },
+  {
+    "nombre": "Gigabyte Aorus RTX Super 2060 8GB GDDR6",
+    "categoria": "Tarjetas Gráfica",
+    "coste": 51990,
+    "stock": 10,
+    "fecha": "2019-07-13",
+    "financiacion": true
+  },
+  {
+    "nombre": "Gigabyte Aorus RTX 2060 6GB GDDR6",
+    "categoria": "Tarjetas Gráfica",
+    "coste": 51990,
+    "stock": 10,
+    "fecha": "2019-07-13",
+    "financiacion": true
+  },
+  {
+    "nombre": "Gigabyte GeForce GTX 1660 SUPER OC 6GB GDDR6",
+    "categoria": "Tarjetas gráficas",
+    "coste": 26400,
+    "stock": 3,
+    "fecha": "2019-04-04",
+    "financiacion": true
+  },
+  {
+    "nombre": "AMD Radeon VII",
+    "categoria": "Tarjetas gráficas",
+    "coste": 61800,
+    "stock": 10,
+    "fecha": "2019-06-07",
+    "financiacion": true
+  },
+  {
+    "nombre": "AMD Radeon RX 5700 XT",
+    "categoria": "Tarjetas gráficas",
+    "coste": 34400,
+    "stock": 20,
+    "fecha": "2019-06-07",
+    "financiacion": true
+  },
+  {
+    "nombre": "AMD Radeon RX Vega 64",
+    "categoria": "Tarjetas gráficas",
+    "coste": 38700,
+    "stock": 50,
+    "fecha": "2019-06-07",
+    "financiacion": true
+  },
+  {
+    "nombre": "AMD RX 5700",
+    "categoria": "Tarjetas gráficas",
+    "coste": 33000,
+    "stock": 30,
+    "fecha": "2019-06-07",
+    "financiacion": true
+  },
+  {
+    "nombre": "AMD RX Vega 56",
+    "categoria": "Tarjetas gráficas",
+    "coste": 31600,
+    "stock": 30,
+    "fecha": "2017-04-13",
+    "financiacion": false
+  },
+  {
+    "nombre": "AMD RX 5600 XT",
+    "categoria": "Tarjetas gráficas",
+    "coste": 28000,
+    "stock": 30,
+    "fecha": "2020-01-016",
+    "financiacion": true
+  },
+  {
+    "nombre": "AMD RX 5500 XT",
+    "categoria": "Tarjetas gráficas",
+    "coste": 20500,
+    "stock": 100,
+    "fecha": "2019-06-07",
+    "financiacion": true
+  },
+  {
+    "nombre": "Radeon RX 580",
+    "categoria": "Tarjetas gráficas",
+    "coste": 17099,
+    "stock": 150,
+    "fecha": "2017-04-17",
+    "financiacion": false
+  },
+  {
+    "nombre": "Radeon RX 480",
+    "categoria": "Tarjetas gráficas",
+    "coste": 33000,
+    "stock": 50,
+    "fecha": "2016-12-07",
+    "financiacion": false
+  },
+  {
+    "nombre": "AMD Ryzen 9 3950X 4.70 GHz",
+    "categoria": "Procesador",
+    "coste": 81490,
+    "stock": 10,
+    "fecha": "2019-05-07",
+    "financiacion": true
+  },
+  {
+    "nombre": "AMD Ryzen 9 3900X 3.8 GHz",
+    "categoria": "Procesador",
+    "coste": 47990,
+    "stock": 30,
+    "fecha": "2019-05-07",
+    "financiacion": true
+  },
+  {
+    "nombre": "AMD Ryzen 7 3800X 3.9 GHz",
+    "categoria": "Procesador",
+    "coste": 37199,
+    "stock": 30,
+    "fecha": "2019-05-07",
+    "financiacion": true
+  },
+  {
+    "nombre": "AMD Ryzen 7 3700X 3.6 GHz",
+    "categoria": "Procesador",
+    "coste": 32590,
+    "stock": 100,
+    "fecha": "2019-05-07",
+    "financiacion": true
+  },
+  {
+    "nombre": "AMD Ryzen 5 3600X 3.8 GHz",
+    "categoria": "Procesador",
+    "coste": 21290,
+    "stock": 200,
+    "fecha": "2019-05-07",
+    "financiacion": false
+  },
+  {
+    "nombre": "AMD Ryzen 5 3600 3.6 GHz",
+    "categoria": "Procesador",
+    "coste": 18190,
+    "stock": 500,
+    "fecha": "2019-05-07",
+    "financiacion": false
+  },
+  {
+    "nombre": "AMD Ryzen 3 3200G 3.6 GHz",
+    "categoria": "Procesador",
+    "coste": 9398,
+    "stock": 100,
+    "fecha": "2019-05-07",
+    "financiacion": false
+  },
+  {
+    "nombre": "AMD Ryzen 7 2700X 3.7 GHz",
+    "categoria": "Procesador",
+    "coste": 18990,
+    "stock": 50,
+    "fecha": "2018-02-14",
+    "financiacion": true
+  },
+  {
+    "nombre": "AMD Ryzen 5 2700 4.1 GHz",
+    "categoria": "Procesador",
+    "coste": 33986,
+    "stock": 30,
+    "fecha": "2018-07-21",
+    "financiacion": true
+  },
+  {
+    "nombre": "Intel Core i9-9900K 3.6 GHz",
+    "categoria": "Procesador",
+    "coste": 53990,
+    "stock": 20,
+    "fecha": "2018-02-14",
+    "financiacion": true
+  },
+  {
+    "nombre": "AMD A10-5800K 3.80Ghz",
+    "categoria": "Procesador",
+    "coste": 10400,
+    "stock": 5,
+    "fecha": "2018-10-30",
     "financiacion": false
   }
 ]
