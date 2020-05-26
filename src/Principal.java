@@ -35,10 +35,26 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Scanner;
 
+/**-------------------------------------------------|
+|   @author (C) Juan Alberto Raya Rodríguez         |
+|   @author (C) Ricardo Delgado Fernández           |
+|   @author (C) Sandro Zanata Ortega                |
+|   @author (C) Gabriel Antonio Estévez Cabello     |
+|   @author (C) José Ignacio del Valle Bustillo     |
+|   @version 26 May.2020                            |
+|   programa: TechMarket.java                       |
+|-------------------------------------------------**/
+
 public class Principal {
 
     static Scanner entrada = new Scanner(System.in);
-
+    
+    
+	/**
+	 * MÉTODO MAIN
+	 * Función que muestra un mensaje de presentación y ejecuta
+	 * la función login
+	 **/
     public static void main(String[] args) {
 
         //mensaje de entrada
@@ -49,7 +65,14 @@ public class Principal {
 
         login();
     }
-
+    
+    
+    
+	/**
+	 * MÉTODO login
+	 * Función que controla el acceso de usuarios y los distingue en 
+	 * User y PowerUser
+	 **/
     public static void login() {
 
         List<Persona> personas = GsonArray.desserializarJsonAArrayPersona();
@@ -85,6 +108,12 @@ public class Principal {
         }
 
     }
+    
+	/**
+	 * MÉTODO opcionesUser
+	 * Función que mediante un switch se muestran las opciones del user 
+	 * que a su vez llaman a otros métodos
+	 **/
 
     public static void opcionesUser(List<Registro> registros) {
 
@@ -102,26 +131,32 @@ public class Principal {
             opcion = entrada.next();
             switch (opcion) {
                 case "g":
-                    System.out.println("Has escogido [GESTIONAR REGISTRO]");
+                    System.out.println("Has escogido [GESTIONAR REGISTRO]\n");
                     gestionarRegistros(registros);
                     break;
                 case "v":
-                    System.out.println("Has escogido [VISUALIZAR REGISTRO]");
+                    System.out.println("Has escogido [VISUALIZAR REGISTRO]\n");
                     visualizarRegistros(registros);
                     break;
                 case "s":
-                    System.out.println("Has escogido [SALIR]");
+                    System.out.println("Has escogido [SALIR]\n");
                     System.out.println("¡Hasta pronto!");
                     break;
                 default:
-                    System.out.println("¡Ha surgido un error, vuelve a intentarlo!");
+                    System.out.println("¡Ha surgido un error, vuelve a intentarlo!\n");
                     break;
             }
 
         }
 
     }
-
+    
+    
+	/**
+	 * MÉTODO opcionesPowerUser
+	 * Función que mediante un switch se muestran las opciones del poweruser
+	 * que a su vez llaman a otros métodos
+	 **/
 
     public static void opcionesPowerUser(List<Registro> registros) {
         String opcion = "";
@@ -142,31 +177,31 @@ public class Principal {
 
             switch (opcion) {
                 case "v":
-                    System.out.println("Has escogido [VISUALIZAR ESTADÍSTICAS]");
+                    System.out.println("Has escogido [VISUALIZAR ESTADÍSTICAS]\n");
 
                     visualizarEstadisticas(registros);
 
                     break;
                 case "e":
-                    System.out.println("Has escogido [EXPORTAR REGISTROS .CSV]");
+                    System.out.println("Has escogido [EXPORTAR REGISTROS .CSV]\n");
 
                     exportarCsv(registros);
 
                     break;
                 case "i":
-                    System.out.println("Has escogido [IMPORTAR REGISTROS .CSV]");
+                    System.out.println("Has escogido [IMPORTAR REGISTROS .CSV]\n");
 
                     importarCsv(registros);
 
                     break;
                 case "m":
-                    System.out.println("Has escogido [ENVIAR REGISTROS .CSV POR EMAIL]");
+                    System.out.println("Has escogido [ENVIAR REGISTROS .CSV POR EMAIL]\n");
 
                     enviarMail(registros);
 
                     break;
                 case "s":
-                    System.out.println("Has escogido [SALIR]");
+                    System.out.println("\nHas escogido [SALIR]");
                     System.out.println("¡Hasta pronto!");
 
                     break;
@@ -176,6 +211,13 @@ public class Principal {
             }
         }
     }
+    
+	/**
+	 * MÉTODO gestionarRegistros
+	 * Función que mediante un switch se muestran las opciones
+	 * para poder gestionar un registro 
+	 * que a su vez llaman a otros métodos
+	 **/
 
     public static void gestionarRegistros(List<Registro> registros) {
 
@@ -196,40 +238,47 @@ public class Principal {
 
             switch (opcion) {
                 case "c":
-                    System.out.println("Has escogido [CREAR REGISTRO]");
+                    System.out.println("Has escogido [CREAR REGISTRO]\n");
 
                     crearReg(registros);
 
                     break;
                 case "l":
-                    System.out.println("Has escogido [LEER REGISTROS]");
+                    System.out.println("Has escogido [LEER REGISTROS]\n");
 
                     leerReg(registros);
 
                     break;
                 case "a":
-                    System.out.println("Has escogido [ACTUALIZAR]");
+                    System.out.println("Has escogido [ACTUALIZAR]\n");
 
                     actualizarReg(registros);
 
                     break;
                 case "b":
-                    System.out.println("Has escogido [BORRAR REGISTRO]");
+                    System.out.println("Has escogido [BORRAR REGISTRO]\n");
 
                     borrarReg(registros);
 
                     break;
                 case "s":
-                    System.out.println("Has escogido [SALIR]");
+                    System.out.println("Has escogido [SALIR]\n");
 
                     break;
                 default:
-                    System.out.println("Ha surgido un error, vuelve a intentarlo!");
+                    System.out.println("\nHa surgido un error, vuelve a intentarlo!");
                     break;
             }
         }
     }
-
+    
+	/**
+	 * MÉTODO crearReg
+	 * Método que nos permite crear un nuevo registro
+	 * Para ello se deberán introducir obligatoriamente 
+	 * todos los campos de cadad registro
+	 **/
+    
     public static void crearReg(List<Registro> registros) {
         String nombre = "";
         System.out.println("Introduzca nombre:");
@@ -262,7 +311,11 @@ public class Principal {
         escribirJson(registros);
     }
 
-
+	/**
+	 * MÉTODO leerReg
+	 * Función que nos realiza un recorrido por el archivo .json
+	 * y encuentra un registro en específico
+	 **/
     public static void leerReg(List<Registro> registros) {
 
         int i = 0;
@@ -271,12 +324,16 @@ public class Principal {
             i++;
         }
     }
-
+    
+	/**
+	 * MÉTODO actualizarReg
+	 * Función que nos permite actualizar un registro en concreto.
+	 **/
     public static void actualizarReg(List<Registro> registros) {
         String opcion = "";
         String i = "";
         String actualizacion = "";
-        System.out.println("¿Qué registro deseas actualizar?(del 0 al " + (registros.size() - 1) + ")");
+        System.out.println("¿Qué registro deseas actualizar? (del 0 al " + (registros.size() - 1) + ")");
         leerReg(registros);
         i = entrada.next(); // se necesita cortafuegos para que no pete si introduces un numero mayor del size o una letra
 
@@ -351,7 +408,12 @@ public class Principal {
         }
     }
 
-
+	/**
+	 * MÉTODO borrarReg
+	 * Función que nos permite borrar un registro en concreto, para ello
+	 * se muestran todos los registros y se elige el número de registro
+	 * que se desee borrar
+	 **/
     public static void borrarReg(List<Registro> registros) {
 
         String i = "";
@@ -363,14 +425,21 @@ public class Principal {
         System.out.println("Borrado con éxito");
         escribirJson(registros);
     }
+    
+	/**
+	 * MÉTODO visualizarRegistros
+	 * Función que permite visualizar un registro dependiendo
+	 * de la categoría y de el precio máximo
+	 **/
 
     public static void visualizarRegistros(List<Registro> registros) {
 
-        System.out.println("Indique en que categoria quiere buscar");
+        System.out.println("Indique la catería a buscar:");
+        System.out.println("grafica - procesador - placa");
         String categoria;
         categoria = entrada.next();
 
-        System.out.println("Indique el precio maximo");
+        System.out.println("Indique el precio maximo:");
         String precio;
         precio = entrada.next();
         boolean condicion = false;
@@ -383,8 +452,13 @@ public class Principal {
             i++;
         }
         if (condicion == false)
-            System.out.println("No se ha encontrado ningún registro con esos criterios de búsqueda");
+            System.out.println("\nNo se ha encontrado ningún registro con esos criterios de búsqueda");
     }
+    
+	/**
+	 * MÉTODO visualizarEstadisticas
+	 * Función que permite visualizar las estadística de los registros
+	 **/
 
     public static void visualizarEstadisticas(List<Registro> registros) {
         System.out.println("Tienes un total de: " + registros.size() + " registros");
@@ -394,6 +468,10 @@ public class Principal {
         System.out.println("Actualizaciones de registros este mes: " + actualizaciones(registros));
     }
 
+	/**
+	 * MÉTODO AUXILIAR media
+	 * Esta función se emplea en visualizarEstadisticas
+	 **/
     public static int media(List<Registro> registros) {
         int m = 0;
         int i = 0;
@@ -403,7 +481,10 @@ public class Principal {
         }
         return m / i;
     }
-
+	/**
+	 * MÉTODO AUXILIAR max
+	 * Esta función se emplea en visualizarEstadisticas
+	 **/
     public static int max(List<Registro> registros) {
         int m = 0;
         int i = 0;
@@ -414,7 +495,11 @@ public class Principal {
         }
         return m;
     }
-
+    
+	/**
+	 * MÉTODO AUXILIAR min
+	 * Esta función se emplea en visualizarEstadisticas
+	 **/
     public static int min(List<Registro> registros) {
         int m = registros.get(0).getCoste();
         int i = 0;
@@ -425,7 +510,10 @@ public class Principal {
         }
         return m;
     }
-
+	/**
+	 * MÉTODO AUXILIAR actualizaciones
+	 * Esta función se emplea en visualizarEstadisticas
+	 **/
     public static int actualizaciones(List<Registro> registros) {
 
         String fechaActual = LocalDate.now().toString();
@@ -444,6 +532,13 @@ public class Principal {
         return contador;
     }
 
+	/**
+	 * MÉTODO importarCsv
+	 * La función nos permite seleccionar un fichero en formato .CSV
+	 * que tengamos en nuestro PC e importarlo como un nuevo 
+	 * conjunto de registros.
+	 **/
+    
     public static void importarCsv(List<Registro> registros) {
 
         registros.addAll(readregFromCSV("Registros.csv"));
@@ -451,6 +546,10 @@ public class Principal {
         System.out.println("Registros importados con éxito!");
     }
 
+	/**
+	 * MÉTODO AUXILIAR 
+	 * Esta función se emplea en importarCsv
+	 **/
     private static List<Registro> readregFromCSV(String fileName) {
 
         JFileChooser file=new JFileChooser();
@@ -475,7 +574,11 @@ public class Principal {
         }
         return reg;
     }
-
+    
+	/**
+	 * MÉTODO AUXILIAR 
+	 * Esta función se emplea en importarCsv
+	 **/
     private static Registro createRegistro(String[] metadata) {
 
         String nombre = metadata[0];
@@ -488,7 +591,11 @@ public class Principal {
         return new Registro(nombre, categoria, coste, stock, fecha, financiacion);
     }
 
-
+	/**
+	 * MÉTODO exportarCsv 
+	 * Función que nos permite elegir donde queremos guardar en 
+	 * nuestro PC los registros en formato .CSV
+	 **/
     public static void exportarCsv(List<Registro> registros) {
 
         try {
@@ -521,7 +628,11 @@ public class Principal {
 
     }
 
-
+	/**
+	 * MÉTODO enviarMail 
+	 * Función que pide un correo y se envían en un adjunto el archivo .CSV
+	 * con los registros de TechMarket
+	 **/
     public static void enviarMail(List<Registro> registros) {
 
         //CREACION DEL ARCHIVO .CSV
@@ -627,6 +738,7 @@ public class Principal {
 
             //Enviado con éxito
             System.out.println("\nEl correo ha sido enviado con éxito! \n \n");
+            System.out.println("ATENCIÓN: Es probable que tu cliente pueda bloquar el correo! ");
         }
 
         //En caso de fallo, volvemos a ejecutar el método
@@ -635,7 +747,10 @@ public class Principal {
             enviarMail(registros);
         }
     }
-
+    
+	/**
+	 * MÉTODO escribirJson
+	 **/
     public static void escribirJson(List<Registro> registros) { //siempre que se actualice la lista hay que usar este metodo para que actualice el json
 
         Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
@@ -644,6 +759,10 @@ public class Principal {
         GsonArray.EscribirJson(representacionBonita, ruta);
 
     }
+    
+	/**
+	 * MÉTODO AUXILIAR getMd5 
+	 **/
 
     public static String getMd5(String input) {
         try {

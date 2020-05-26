@@ -1,59 +1,65 @@
 public class Persona {
-    private String user;
-    private String password;
-    private String tipo;
-    private String email;
 
-    public Persona(String user, String password, String tipo, String email) {
-        this.user     = user;
-        this.password = password;
-        this.tipo     = tipo;
-        this.email    = email;
-    }
+	//DEFINIMOS VARIABLES
+	private String user;
+	private String password;
+	private String tipo;
+	private String email;
 
-    public Persona(String user) {
-        this.user = user;
-    }
 
-    public String getUser() {
-        return user;
-    }
+	//CONSTRUCTOR
+	public Persona(String user, String password, String tipo, String email) {
+		this.user     = user;
+		this.password = password;
+		this.tipo     = tipo;
+		this.email    = email;
+	}
 
-    public void setUser(String user) {
-        this.user = user;
-    }
+	//GETTERS Y SETTERS
+	public Persona(String user) {
+		this.user = user;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public String getUser() {
+		return user;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public void setUser(String user) {
+		this.user = user;
+	}
 
-    public String getTipo() {
-        return tipo;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public String getTipo() {
+		return tipo;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
 
-    @Override
-    public String toString() {
-        return "Persona{" +
-                "user='" + user + '\'' +
-                ", password='" + password + '\'' +
-                ", tipo='" + tipo + '\'' +
-                ", email='" + email + '\'' +
-                '}';
-    }
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	//FORMATO
+	@Override
+	public String toString() {
+		return "Persona{" +
+				"user='" + user + '\'' +
+				", password='" + password + '\'' +
+				", tipo='" + tipo + '\'' +
+				", email='" + email + '\'' +
+				'}';
+	}
 }
