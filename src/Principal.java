@@ -168,7 +168,6 @@ public class Principal {
                 case "s":
                     System.out.println("Has escogido [SALIR]");
                     System.out.println("¡Hasta pronto!");
-
                     break;
                 default:
                     System.out.println("Ha surgido un error, vuelve a intentarlo!");
@@ -446,7 +445,6 @@ public class Principal {
 
     public static void importarCsv(List<Registro> registros) {
 
-
         registros.addAll(readregFromCSV("Registros.csv"));
         escribirJson(registros);
         System.out.println("Registros importados con éxito!");
@@ -455,12 +453,18 @@ public class Principal {
 
     private static List<Registro> readregFromCSV(String fileName) {
 
+        JFileChooser file=new JFileChooser();
+        file.showOpenDialog(null);
+        String path = file.getSelectedFile().getPath();
+
         List<Registro> reg = new ArrayList<>();
-        Path pathToFile = Paths.get(fileName);
-        try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.US_ASCII)) {
+        Path pathToFile = Paths.get(path);
+        System.out.println();
+        try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) {
             String line = br.readLine();
+            System.out.println(line);
             while (line != null) {
-                String[] attributes = line.split(",");
+                String[] attributes = line.split(";");
                 Registro r = createRegistro(attributes);
                 reg.add(r);
                 line = br.readLine();
@@ -513,8 +517,9 @@ public class Principal {
             }
         } catch (IOException ex) {
             System.out.println("Error en la exportación del archivo .CSV \n \n");
-            opcionesPowerUser(registros);
         }
+
+        opcionesPowerUser(registros);
     }
 
 
@@ -551,7 +556,7 @@ public class Principal {
             }
         } catch (IOException ex) {
             System.out.println("Error en la exportación del archivo .CSV \n \n");
-            opcionesPowerUser(registros);
+            //opcionesPowerUser(registros);
         }
 
         //
@@ -623,7 +628,6 @@ public class Principal {
 
             //Enviado con éxito
             System.out.println("\nEl correo ha sido enviado con éxito! \n \n");
-            opcionesPowerUser(registros);
         }
 
         //En caso de fallo, volvemos a ejecutar el método
@@ -631,6 +635,7 @@ public class Principal {
             System.out.println("\nEl correo electrónico es incorrecto! \n ");
             enviarMail(registros);
         }
+        opcionesPowerUser(registros);
     }
 
     public static void escribirJson(List<Registro> registros) { //siempre que se actualice la lista hay que usar este metodo para que actualice el json
