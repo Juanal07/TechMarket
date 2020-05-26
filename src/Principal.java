@@ -1,17 +1,24 @@
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import javax.activation.DataHandler;
+import javax.activation.FileDataSource;
+import javax.mail.BodyPart;
 import javax.mail.Message;
+import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 
 import java.awt.Component;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigInteger;
@@ -35,7 +42,6 @@ public class Principal {
         System.out.println("・ーーーーーーーーーーーーーーーーーーー・");
 
         login();
-
     }
 
     public static void login() {
@@ -162,7 +168,6 @@ public class Principal {
                     System.out.println("Ha surgido un error, vuelve a intentarlo!");
                     break;
             }
-
         }
     }
 
@@ -216,7 +221,6 @@ public class Principal {
                     System.out.println("Ha surgido un error, vuelve a intentarlo!");
                     break;
             }
-
         }
     }
 
@@ -250,10 +254,8 @@ public class Principal {
         Registro reg = new Registro(nombre, categoria, coste2, stock2, fecha, financiacion2);
         registros.add(reg);
         escribirJson(registros);
-
-
     }
-
+    
 
     public static void leerReg(List<Registro> registros) {
 
@@ -262,9 +264,7 @@ public class Principal {
             System.out.println(i + ": " + r.toString());
             i++;
         }
-
     }
-
 
     public static void actualizarReg(List<Registro> registros) {
         String opcion = "";
@@ -378,10 +378,7 @@ public class Principal {
         }
         if (condicion == false)
             System.out.println("No se ha encontrado ningún registro con esos criterios de búsqueda");
-
-
     }
-
 
     public static void visualizarEstadisticas(List<Registro> registros) {
         System.out.println("Tienes un total de: " + registros.size() + " registros");
@@ -442,8 +439,38 @@ public class Principal {
     }
 
     public static void importarCsv(List<Registro> registros) {
+    
+    	String aux="";   
+        String texto ="";
+        
+    	  try
+    	  {
+    	   //Carga la venta para elegir el archivo
+    	   JFileChooser file=new JFileChooser();
+    	   file.showOpenDialog(null);
+    	   File abre =file.getSelectedFile();
 
-
+    	   
+    	   if(abre!=null)
+    	   {     
+    	      FileReader archivos = new FileReader(abre);
+    	      
+    	      BufferedReader lee = new BufferedReader(archivos);
+    	      
+    	      while((aux=lee.readLine())!=null)
+    	      {
+    	         texto+= aux+ "\n";
+    	      }
+    	         lee.close();
+    	    }    
+    	   }
+    	  
+    	  
+    	   catch(IOException ex)
+    	   {
+             System.out.println("Error: El archivo no se ha importado!");
+             
+    	    }
     }
 
     public static void exportarCsv(List<Registro> registros) {
@@ -456,8 +483,6 @@ public class Principal {
 
             if(fichero != null)
             {
-                /*guardamos el archivo y le damos el formato directamente,
-                 * si queremos que se guarde en formato doc lo definimos como .doc*/
                 FileWriter  save = new FileWriter(fichero + ".csv");
                 for (Registro r : registros) {
                     save.write("" + r.getNombre());
@@ -482,17 +507,52 @@ public class Principal {
             opcionesPowerUser(registros);
         }
     }
-
+    
 
     public static void enviarMail(List<Registro> registros) {
-
-        Scanner entrada = new Scanner(System.in);
-
+    	
+    	//CREACION DEL ARCHIVO .CSV 
+        //el archivo .csv se adjuntará en el correo
+    	//primero debemos de crearlo de la siguiente forma:
+    	
+    	 try
+    	 {  
+             File fichero = new File("Registros.csv");
+      
+             if(fichero != null)
+             {
+                 /*guardamos el archivo y le damos el formato directamente,
+                  * si queremos que se guarde en formato doc lo definimos como .doc*/
+            	// FileWriter save = new FileWriter("C:\\Users\\RICARDO\\Desktop\\gadfvs\\Archivo.csv");
+            	 
+                 FileWriter save = new FileWriter("Registros.csv");
+                 for (Registro r : registros) {
+                     save.write("" + r.getNombre());
+                     save.write(";");
+                     save.write("" + r.getCategoria());
+                     save.write(";");
+                     save.write("" + r.getCoste());
+                     save.write(";");
+                     save.write("" + r.getStock());
+                     save.write(";");
+                     save.write("" + r.getFecha());
+                     save.write(";");
+                     save.write("" + r.isFinanciacion());
+                     save.write("\n");
+                 }
+                 save.close();
+             }
+         }
+         catch(IOException ex) {
+             System.out.println("Error en la exportación del archivo .CSV \n \n");
+             opcionesPowerUser(registros);
+         }
+    	 
         //
         // DESTINATARIO DEL CORREO
         //
         System.out.println("Introduce el correo electrónico: ");
-        String destinatario = entrada.nextLine();
+        String destinatario = entrada.next();
 
         //
         // REMITENTE DEL CORREO
@@ -502,23 +562,7 @@ public class Principal {
         String remitente = "techmarket42";       //Dirección de correo del remitente (se añade solo @gmail.com)
         String contraseña = "Techmarket+19";    //Contraseña de la cuenta de gmail.com
 
-
-        //
-        // CONTENIDO DEL CORREO
-        //
-
-        //Asunto del correo electrónico
-        String asunto = "Información registros:";
-
-        //Cuerpo del correo electrónico
-        String cuerpo = "Meter aquí los registros a enviar";
-
-        //Firma del correo electrónico
-        String firma = "\n \nGracias por confiar en nosotros! \n [Equipo de Techmarket]";
-
-
-
-
+           
         //Configuraciones de Google / Gmail
         Properties props = System.getProperties();
         props.put("mail.smtp.host", "smtp.gmail.com");            //El servidor SMTP de Google
@@ -532,35 +576,54 @@ public class Principal {
         MimeMessage message = new MimeMessage(session);
 
         try {
-            message.setFrom(new InternetAddress(remitente));
-            message.addRecipients(Message.RecipientType.TO, destinatario);   //Se podrían añadir varios de la misma manera
 
-            //Se añade el asunto al correo
-            message.setSubject(asunto);
+        	//Asunto del correo electrónico
+        	String asunto = "[PETICIÓN DE REGISTROS]";
+        	
+        	
+            //Creamos la parte de texto
+        	BodyPart texto = new MimeBodyPart();
+        	texto.setText("Buenos días, \nProcedemos a enviarle su petición de registros de Techmarket. \nPuede descargar el archivo adjunto en formato .CSV \n"
+        			+ "Gracias por confiar en nosotros! \n\n[Equipo de Techmarket]");
+        	
+            //Creamos la parte del archivo adjunto
+        	BodyPart adjuntar = new MimeBodyPart();
+        	adjuntar.setDataHandler(new DataHandler(new FileDataSource("Registros.csv")));
+        	adjuntar.setFileName("Registros.csv");
 
-            //Se añade el cuerpo al correo
-            message.setText(cuerpo);
+            //Creamos el conjunto que incluye la parte de texto y la parte del archivo adjunto
+        	MimeMultipart conjunto = new MimeMultipart();
 
-            //Se añade la firma al correo
-            message.setText(firma);
+        	conjunto.addBodyPart(texto);
+        	conjunto.addBodyPart(adjuntar);	
+        	
+        	//Se indica el remitente y destinatario
+        	message.setFrom(new InternetAddress(remitente));
+        	message.addRecipients(Message.RecipientType.TO, destinatario);   //Se podrían añadir varios de la misma manera
 
-            //Se realiza el login por parte del remitente
-            Transport transport = session.getTransport("smtp");
-            transport.connect("smtp.gmail.com", remitente, contraseña);
+        	//Se añade el asunto al correo
+        	message.setSubject(asunto);
 
-            //Se envía el correo electrónico
-            transport.sendMessage(message, message.getAllRecipients());
-            transport.close();
+        	//Se añade el cuerpo al correo
+        	message.setContent(conjunto);
 
-            //Enviado con éxito
-            System.out.println("\nEl correo ha sido enviado con éxito! \n \n");
-            opcionesPowerUser(registros);
+        	//Se realiza el login por parte del remitente
+        	Transport transport = session.getTransport("smtp");
+        	transport.connect("smtp.gmail.com", remitente, contraseña);
+
+        	//Se envía el correo electrónico
+        	transport.sendMessage(message, message.getAllRecipients());
+        	transport.close();
+
+        	//Enviado con éxito
+        	System.out.println("\nEl correo ha sido enviado con éxito! \n \n");
+        	opcionesPowerUser(registros);
         }
 
         //En caso de fallo, volvemos a ejecutar el método
         catch (Exception e) {
-            System.out.println("\nEl correo electrónico es incorrecto! \n ");
-            enviarMail(registros);
+        	System.out.println("\nEl correo electrónico es incorrecto! \n ");
+        	enviarMail(registros);
         }
     }
 
