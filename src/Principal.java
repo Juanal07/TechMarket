@@ -13,6 +13,7 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.swing.JFileChooser;
+import javax.swing.text.StyledEditorKit;
 
 import java.awt.Component;
 import java.io.BufferedReader;
@@ -22,9 +23,14 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.Scanner;
@@ -255,7 +261,7 @@ public class Principal {
         registros.add(reg);
         escribirJson(registros);
     }
-    
+
 
     public static void leerReg(List<Registro> registros) {
 
@@ -439,51 +445,55 @@ public class Principal {
     }
 
     public static void importarCsv(List<Registro> registros) {
-    
-    	String aux="";   
-        String texto ="";
-        
-    	  try
-    	  {
-    	   //Carga la venta para elegir el archivo
-    	   JFileChooser file=new JFileChooser();
-    	   file.showOpenDialog(null);
-    	   File abre =file.getSelectedFile();
 
-    	   
-    	   if(abre!=null)
-    	   {     
-    	      FileReader archivos = new FileReader(abre);
-    	      
-    	      BufferedReader lee = new BufferedReader(archivos);
-    	      
-    	      while((aux=lee.readLine())!=null)
-    	      {
-    	         texto+= aux+ "\n";
-    	      }
-    	         lee.close();
-    	    }    
-    	   }
-    	  
-    	  
-    	   catch(IOException ex)
-    	   {
-             System.out.println("Error: El archivo no se ha importado!");
-             
-    	    }
+
+        registros.addAll(readregFromCSV("Registros.csv"));
+        escribirJson(registros);
+        System.out.println("Registros importados con éxito!");
+        opcionesPowerUser(registros);
     }
+
+    private static List<Registro> readregFromCSV(String fileName) {
+
+        List<Registro> reg = new ArrayList<>();
+        Path pathToFile = Paths.get(fileName);
+        try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.US_ASCII)) {
+            String line = br.readLine();
+            while (line != null) {
+                String[] attributes = line.split(",");
+                Registro r = createRegistro(attributes);
+                reg.add(r);
+                line = br.readLine();
+            }
+
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        return reg;
+    }
+
+    private static Registro createRegistro(String[] metadata) {
+
+        String nombre = metadata[0];
+        String categoria = metadata[1];
+        int coste = Integer.parseInt(metadata[2]);
+        int stock = Integer.parseInt(metadata[3]);
+        String fecha = metadata[4];
+        boolean financiacion = Boolean.parseBoolean(metadata[5]);
+        
+        return new Registro(nombre, categoria, coste, stock, fecha, financiacion);
+    }
+
 
     public static void exportarCsv(List<Registro> registros) {
 
-        try
-        {
-            JFileChooser file=new JFileChooser();
+        try {
+            JFileChooser file = new JFileChooser();
             file.showSaveDialog(null);
             File fichero = file.getSelectedFile();
 
-            if(fichero != null)
-            {
-                FileWriter  save = new FileWriter(fichero + ".csv");
+            if (fichero != null) {
+                FileWriter save = new FileWriter(fichero + ".csv");
                 for (Registro r : registros) {
                     save.write("" + r.getNombre());
                     save.write(";");
@@ -501,53 +511,49 @@ public class Principal {
                 save.close();
                 System.out.println("El archivo ha sido exportado con éxito!\n \n");
             }
-        }
-        catch(IOException ex) {
+        } catch (IOException ex) {
             System.out.println("Error en la exportación del archivo .CSV \n \n");
             opcionesPowerUser(registros);
         }
     }
-    
+
 
     public static void enviarMail(List<Registro> registros) {
-    	
-    	//CREACION DEL ARCHIVO .CSV 
+
+        //CREACION DEL ARCHIVO .CSV
         //el archivo .csv se adjuntará en el correo
-    	//primero debemos de crearlo de la siguiente forma:
-    	
-    	 try
-    	 {  
-             File fichero = new File("Registros.csv");
-      
-             if(fichero != null)
-             {
-                 /*guardamos el archivo y le damos el formato directamente,
-                  * si queremos que se guarde en formato doc lo definimos como .doc*/
-            	// FileWriter save = new FileWriter("C:\\Users\\RICARDO\\Desktop\\gadfvs\\Archivo.csv");
-            	 
-                 FileWriter save = new FileWriter("Registros.csv");
-                 for (Registro r : registros) {
-                     save.write("" + r.getNombre());
-                     save.write(";");
-                     save.write("" + r.getCategoria());
-                     save.write(";");
-                     save.write("" + r.getCoste());
-                     save.write(";");
-                     save.write("" + r.getStock());
-                     save.write(";");
-                     save.write("" + r.getFecha());
-                     save.write(";");
-                     save.write("" + r.isFinanciacion());
-                     save.write("\n");
-                 }
-                 save.close();
-             }
-         }
-         catch(IOException ex) {
-             System.out.println("Error en la exportación del archivo .CSV \n \n");
-             opcionesPowerUser(registros);
-         }
-    	 
+        //primero debemos de crearlo de la siguiente forma:
+
+        try {
+            File fichero = new File("Registros.csv");
+
+            if (fichero != null) {
+                /*guardamos el archivo y le damos el formato directamente,
+                 * si queremos que se guarde en formato doc lo definimos como .doc*/
+                // FileWriter save = new FileWriter("C:\\Users\\RICARDO\\Desktop\\gadfvs\\Archivo.csv");
+
+                FileWriter save = new FileWriter("Registros.csv");
+                for (Registro r : registros) {
+                    save.write("" + r.getNombre());
+                    save.write(";");
+                    save.write("" + r.getCategoria());
+                    save.write(";");
+                    save.write("" + r.getCoste());
+                    save.write(";");
+                    save.write("" + r.getStock());
+                    save.write(";");
+                    save.write("" + r.getFecha());
+                    save.write(";");
+                    save.write("" + r.isFinanciacion());
+                    save.write("\n");
+                }
+                save.close();
+            }
+        } catch (IOException ex) {
+            System.out.println("Error en la exportación del archivo .CSV \n \n");
+            opcionesPowerUser(registros);
+        }
+
         //
         // DESTINATARIO DEL CORREO
         //
@@ -562,7 +568,7 @@ public class Principal {
         String remitente = "techmarket42";       //Dirección de correo del remitente (se añade solo @gmail.com)
         String contraseña = "Techmarket+19";    //Contraseña de la cuenta de gmail.com
 
-           
+
         //Configuraciones de Google / Gmail
         Properties props = System.getProperties();
         props.put("mail.smtp.host", "smtp.gmail.com");            //El servidor SMTP de Google
@@ -577,53 +583,53 @@ public class Principal {
 
         try {
 
-        	//Asunto del correo electrónico
-        	String asunto = "[PETICIÓN DE REGISTROS]";
-        	
-        	
+            //Asunto del correo electrónico
+            String asunto = "[PETICIÓN DE REGISTROS]";
+
+
             //Creamos la parte de texto
-        	BodyPart texto = new MimeBodyPart();
-        	texto.setText("Buenos días, \nProcedemos a enviarle su petición de registros de Techmarket. \nPuede descargar el archivo adjunto en formato .CSV \n"
-        			+ "Gracias por confiar en nosotros! \n\n[Equipo de Techmarket]");
-        	
+            BodyPart texto = new MimeBodyPart();
+            texto.setText("Buenos días, \nProcedemos a enviarle su petición de registros de Techmarket. \nPuede descargar el archivo adjunto en formato .CSV \n"
+                    + "Gracias por confiar en nosotros! \n\n[Equipo de Techmarket]");
+
             //Creamos la parte del archivo adjunto
-        	BodyPart adjuntar = new MimeBodyPart();
-        	adjuntar.setDataHandler(new DataHandler(new FileDataSource("Registros.csv")));
-        	adjuntar.setFileName("Registros.csv");
+            BodyPart adjuntar = new MimeBodyPart();
+            adjuntar.setDataHandler(new DataHandler(new FileDataSource("Registros.csv")));
+            adjuntar.setFileName("Registros.csv");
 
             //Creamos el conjunto que incluye la parte de texto y la parte del archivo adjunto
-        	MimeMultipart conjunto = new MimeMultipart();
+            MimeMultipart conjunto = new MimeMultipart();
 
-        	conjunto.addBodyPart(texto);
-        	conjunto.addBodyPart(adjuntar);	
-        	
-        	//Se indica el remitente y destinatario
-        	message.setFrom(new InternetAddress(remitente));
-        	message.addRecipients(Message.RecipientType.TO, destinatario);   //Se podrían añadir varios de la misma manera
+            conjunto.addBodyPart(texto);
+            conjunto.addBodyPart(adjuntar);
 
-        	//Se añade el asunto al correo
-        	message.setSubject(asunto);
+            //Se indica el remitente y destinatario
+            message.setFrom(new InternetAddress(remitente));
+            message.addRecipients(Message.RecipientType.TO, destinatario);   //Se podrían añadir varios de la misma manera
 
-        	//Se añade el cuerpo al correo
-        	message.setContent(conjunto);
+            //Se añade el asunto al correo
+            message.setSubject(asunto);
 
-        	//Se realiza el login por parte del remitente
-        	Transport transport = session.getTransport("smtp");
-        	transport.connect("smtp.gmail.com", remitente, contraseña);
+            //Se añade el cuerpo al correo
+            message.setContent(conjunto);
 
-        	//Se envía el correo electrónico
-        	transport.sendMessage(message, message.getAllRecipients());
-        	transport.close();
+            //Se realiza el login por parte del remitente
+            Transport transport = session.getTransport("smtp");
+            transport.connect("smtp.gmail.com", remitente, contraseña);
 
-        	//Enviado con éxito
-        	System.out.println("\nEl correo ha sido enviado con éxito! \n \n");
-        	opcionesPowerUser(registros);
+            //Se envía el correo electrónico
+            transport.sendMessage(message, message.getAllRecipients());
+            transport.close();
+
+            //Enviado con éxito
+            System.out.println("\nEl correo ha sido enviado con éxito! \n \n");
+            opcionesPowerUser(registros);
         }
 
         //En caso de fallo, volvemos a ejecutar el método
         catch (Exception e) {
-        	System.out.println("\nEl correo electrónico es incorrecto! \n ");
-        	enviarMail(registros);
+            System.out.println("\nEl correo electrónico es incorrecto! \n ");
+            enviarMail(registros);
         }
     }
 
@@ -647,8 +653,7 @@ public class Principal {
                 hashtext = "0" + hashtext;
             }
             return hashtext;
-        }
-        catch (NoSuchAlgorithmException e) {
+        } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
     }
