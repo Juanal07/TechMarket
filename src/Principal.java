@@ -168,6 +168,7 @@ public class Principal {
                 case "s":
                     System.out.println("Has escogido [SALIR]");
                     System.out.println("¡Hasta pronto!");
+
                     break;
                 default:
                     System.out.println("Ha surgido un error, vuelve a intentarlo!");
@@ -448,7 +449,6 @@ public class Principal {
         registros.addAll(readregFromCSV("Registros.csv"));
         escribirJson(registros);
         System.out.println("Registros importados con éxito!");
-        opcionesPowerUser(registros);
     }
 
     private static List<Registro> readregFromCSV(String fileName) {
@@ -519,7 +519,6 @@ public class Principal {
             System.out.println("Error en la exportación del archivo .CSV \n \n");
         }
 
-        opcionesPowerUser(registros);
     }
 
 
@@ -556,7 +555,7 @@ public class Principal {
             }
         } catch (IOException ex) {
             System.out.println("Error en la exportación del archivo .CSV \n \n");
-            //opcionesPowerUser(registros);
+
         }
 
         //
@@ -635,7 +634,6 @@ public class Principal {
             System.out.println("\nEl correo electrónico es incorrecto! \n ");
             enviarMail(registros);
         }
-        opcionesPowerUser(registros);
     }
 
     public static void escribirJson(List<Registro> registros) { //siempre que se actualice la lista hay que usar este metodo para que actualice el json

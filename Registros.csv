@@ -30,3 +30,37 @@ AMD Ryzen 7 2700X 3.7 GHz;procesador;18990;50;2018-02-14;true
 AMD Ryzen 5 2700 4.1 GHz;procesador;33986;30;2018-07-21;true
 Intel Core i9-9900K 3.6 GHz;procesador;53990;20;2018-02-14;true
 AMD A10-5800K 3.80Ghz;procesador;10400;5;2018-10-30;false
+prueba;Tarjetas Gráfica;15499;30;2016-10-18;false
+Gigabyte GeForce GTX 1050Ti OC 4GB GDDR5;grafica;15499;30;2016-10-18;false
+Gigabyte GeForce GTX 1060 OC 6GB GDDR5;grafica;18948;100;2016-07-19;false
+Gigabyte GeForce GTX 1070 Mini ITX OC 8GB GDDR5;grafica;45990;5;2016-07-19;false
+Gigabyte GeForce GTX 1070Ti 8GB GDDR5;grafica;45499;20;2016-10-19;true
+Gigabyte VGA Gigabyte Nvidia GeForce GTX 1080 G1 8GB GDDR5;grafica;64000;10;2016-07-15;true
+Gigabyte Aorus GTX 1080Ti 11GB;grafica;114099;10;2016-10-19;true
+Gigabyte Aorus RTX 2080Ti 11GB GDDR6;grafica;134099;20;2019-07-13;true
+Gigabyte Aorus RTX Super 2080 8GB GDDR6;grafica;83999;50;2019-07-13;true
+Gigabyte Aorus RTX Super 2070 8GB GDDR6;grafica;64990;10;2019-07-13;true
+Gigabyte Aorus RTX Super 2060 8GB GDDR6;grafica;51990;10;2019-07-13;true
+Gigabyte Aorus RTX 2060 6GB GDDR6;grafica;51990;10;2019-07-13;true
+Gigabyte GeForce GTX 1660 SUPER OC 6GB GDDR6;graficas;26400;3;2019-04-04;true
+AMD Radeon VII;graficas;61800;10;2019-06-07;true
+AMD Radeon RX 5700 XT;graficas;34400;20;2019-06-07;true
+AMD Radeon RX Vega 64;graficas;38700;50;2019-06-07;true
+AMD RX 5700;graficas;33000;30;2019-06-07;true
+AMD RX Vega 56;graficas;31600;30;2017-04-13;false
+AMD RX 5600 XT;graficas;28000;30;2020-01-016;true
+AMD RX 5500 XT;graficas;20500;100;2019-06-07;true
+Radeon RX 580;graficas;17099;150;2017-04-17;false
+Radeon RX 480;graficas;33000;50;2016-12-07;false
+AMD Ryzen 9 3950X 4.70 GHz;procesador;81490;10;2019-05-07;true
+AMD Ryzen 9 3900X 3.8 GHz;procesador;47990;30;2019-05-07;true
+AMD Ryzen 7 3800X 3.9 GHz;procesador;37199;30;2019-05-07;true
+AMD Ryzen 7 3700X 3.6 GHz;procesador;32590;100;2019-05-07;true
+AMD Ryzen 5 3600X 3.8 GHz;procesador;21290;200;2019-05-07;false
+AMD Ryzen 5 3600 3.6 GHz;procesador;18190;500;2019-05-07;false
+AMD Ryzen 3 3200G 3.6 GHz;procesador;9398;100;2019-05-07;false
+AMD Ryzen 7 2700X 3.7 GHz;procesador;18990;50;2018-02-14;true
+AMD Ryzen 5 2700 4.1 GHz;procesador;33986;30;2018-07-21;true
+Intel Core i9-9900K 3.6 GHz;procesador;53990;20;2018-02-14;true
+AMD A10-5800K 3.80Ghz;procesador;10400;5;2018-10-30;false
+prueba;Tarjetas Gráfica;15499;30;2016-10-18;false
