@@ -1,4 +1,6 @@
-Bienvenido a nuestro proyecto TechMarket
+!Bienvenido a nuestro proyecto TechMarket!
+
+Página oficial del proyecto: https://github.com/Juanal07/TechMarket
 
 Encontrarás un ejecutable .exe en la carpeta raiz del proyecto.
 
