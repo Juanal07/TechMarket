@@ -680,14 +680,14 @@ public class Principal {
 
         //Cuenta de correo del remitente
         String remitente = "techmarket42";       //Dirección de correo del remitente (se añade solo @gmail.com)
-        String contraseña = "Techmarket+19";    //Contraseña de la cuenta de gmail.com
+        String pass = "Techmarket+19";    //Contraseña de la cuenta de gmail.com
 
 
         //Configuraciones de Google / Gmail
         Properties props = System.getProperties();
         props.put("mail.smtp.host", "smtp.gmail.com");            //El servidor SMTP de Google
         props.put("mail.smtp.user", remitente);
-        props.put("mail.smtp.clave", contraseña);
+        props.put("mail.smtp.clave", pass);
         props.put("mail.smtp.auth", "true");                    //Autentificación de correo y contraseña
         props.put("mail.smtp.starttls.enable", "true");        //Para conectar de manera segura al servidor SMTP
         props.put("mail.smtp.port", "587");                   //El puerto SMTP seguro de Google (encriptado)
@@ -729,7 +729,7 @@ public class Principal {
 
             //Se realiza el login por parte del remitente
             Transport transport = session.getTransport("smtp");
-            transport.connect("smtp.gmail.com", remitente, contraseña);
+            transport.connect("smtp.gmail.com", remitente, pass);
 
             //Se envía el correo electrónico
             transport.sendMessage(message, message.getAllRecipients());
