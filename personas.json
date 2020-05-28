@@ -1,11 +1,11 @@
 [{
-  "user": "usuario",
+  "user": "user",
   "password": "81dc9bdb52d04dc20036dbd8313ed055",
   "tipo": "user",
   "email": "prueba@gmail.com"
 },
 {
-  "user": "administrador",
+  "user": "admin",
   "password": "81dc9bdb52d04dc20036dbd8313ed055",
   "tipo": "poweruser",
   "email": "prueba@gmail.com"

@@ -42,7 +42,7 @@ import java.util.Scanner;
 |   @author (C) Gabriel Antonio Estévez Cabello     |
 |   @author (C) José Ignacio del Valle Bustillo     |
 |   @version 26 May.2020                            |
-|   programa: TechMarket.java                       |
+|   programa: TechMarket™                           |
 |-------------------------------------------------**/
 
 public class Principal {
@@ -59,9 +59,9 @@ public class Principal {
 
         //mensaje de entrada
         System.out.println("");
-        System.out.println("・ーーーーーーーーーーーーーーーーーーー・");
-        System.out.println("《                 TECHMARKET          》");
-        System.out.println("・ーーーーーーーーーーーーーーーーーーー・");
+        System.out.println(" -------------------");
+        System.out.println(" |    TECHMARKET   |");
+        System.out.println(" -------------------");
 
         login();
     }
@@ -645,7 +645,6 @@ public class Principal {
             if (fichero != null) {
                 /*guardamos el archivo y le damos el formato directamente,
                  * si queremos que se guarde en formato doc lo definimos como .doc*/
-                // FileWriter save = new FileWriter("C:\\Users\\RICARDO\\Desktop\\gadfvs\\Archivo.csv");
 
                 FileWriter save = new FileWriter("Registros.csv");
                 for (Registro r : registros) {
